@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using AddLinq1.Model;
@@ -161,7 +162,8 @@ namespace AddLinq1
             Console.WriteLine("Aufgabe 9");
             Console.WriteLine("Eine Zeile --------------");
 
-            //TODO
+            var aufg9 = mitarbeiterList.Where(ma => projektListe.Where(pro => pro.ProjektName == "Mars").Any(pro => pro.ProjekteID == ma.ProjektID)).Count();
+            Console.WriteLine($"Anzahl MAs von Mars Projekten: {aufg9}");
 
             Console.WriteLine("--------------");
             Console.WriteLine("Aufgabe 10");
