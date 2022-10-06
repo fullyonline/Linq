@@ -111,12 +111,22 @@ namespace AddLinq1
             Console.WriteLine("Aufgabe 6");
             Console.WriteLine("--------------");
 
-            //TODO
+            var aufg6 = from ma in mitarbeiterList
+                        where ma.Name.StartsWith("K")
+                        select ma;
+
+            foreach(var ma in aufg6){
+                Console.WriteLine($"{ma.Name}\t{ma.Vorname}");
+            };
 
             Console.WriteLine("Eine Zeile--------------");
 
+            var aufg6b = mitarbeiterList.Where(ma => ma.Name.StartsWith("K"));
 
-            //TODO
+            foreach (var ma in aufg6b)
+            {
+                Console.WriteLine($"{ma.Name}\t{ma.Vorname}");
+            };
 
             Console.WriteLine("--------------");
             Console.WriteLine("Aufgabe 7");
