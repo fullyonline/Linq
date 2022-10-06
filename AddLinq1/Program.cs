@@ -131,7 +131,7 @@ namespace AddLinq1
 
             Console.WriteLine("Eine Zeile--------------");
 
-            var aufg6b = mitarbeiterList.Where(ma => projektListe.Where(pro => pro.ProjektName == "Erde").Any(item => item.ProjekteID == ma.ProjektID) && abteilungListe.Where(abt => abt.Name == "Software").Any(item => item.AbteilungID == ma.AbteilungID));
+            var aufg6b = mitarbeiterList.Where(ma => ma.Projekte.ProjektName == "Erde" && ma.Abteilung.Name == "Software");
 
             foreach (var ma in aufg6b)
             {
