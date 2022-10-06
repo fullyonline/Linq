@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="JuveTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Abteilung">
+          <Key>
+            <PropertyRef Name="AbteilungID" />
+          </Key>
+          <Property Name="AbteilungID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mitarbeiter">
+          <Key>
+            <PropertyRef Name="MitarbeiterID" />
+          </Key>
+          <Property Name="MitarbeiterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Vorname" Type="varchar" MaxLength="50" />
+          <Property Name="Position" Type="varchar" MaxLength="50" />
+          <Property Name="ProjektID" Type="int" Nullable="false" />
+          <Property Name="AbteilungID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projekte">
+          <Key>
+            <PropertyRef Name="ProjekteID" />
+          </Key>
+          <Property Name="ProjekteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjektName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Mitarbeiter_Abteilung">
+          <End Role="Abteilung" Type="Self.Abteilung" Multiplicity="1" />
+          <End Role="Mitarbeiter" Type="Self.Mitarbeiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Abteilung">
+              <PropertyRef Name="AbteilungID" />
+            </Principal>
+            <Dependent Role="Mitarbeiter">
+              <PropertyRef Name="AbteilungID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mitarbeiter_Projekte">
+          <End Role="Projekte" Type="Self.Projekte" Multiplicity="1" />
+          <End Role="Mitarbeiter" Type="Self.Mitarbeiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekte">
+              <PropertyRef Name="ProjekteID" />
+            </Principal>
+            <Dependent Role="Mitarbeiter">
+              <PropertyRef Name="ProjektID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JuveTestModelStoreContainer">
+          <EntitySet Name="Abteilung" EntityType="Self.Abteilung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mitarbeiter" EntityType="Self.Mitarbeiter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projekte" EntityType="Self.Projekte" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Mitarbeiter_Abteilung" Association="Self.FK_Mitarbeiter_Abteilung">
+            <End Role="Abteilung" EntitySet="Abteilung" />
+            <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mitarbeiter_Projekte" Association="Self.FK_Mitarbeiter_Projekte">
+            <End Role="Projekte" EntitySet="Projekte" />
+            <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JuveTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Abteilung">
+          <Key>
+            <PropertyRef Name="AbteilungID" />
+          </Key>
+          <Property Name="AbteilungID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Mitarbeiter" Relationship="Self.FK_Mitarbeiter_Abteilung" FromRole="Abteilung" ToRole="Mitarbeiter" />
+        </EntityType>
+        <EntityType Name="Mitarbeiter">
+          <Key>
+            <PropertyRef Name="MitarbeiterID" />
+          </Key>
+          <Property Name="MitarbeiterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProjektID" Type="Int32" Nullable="false" />
+          <Property Name="AbteilungID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Abteilung" Relationship="Self.FK_Mitarbeiter_Abteilung" FromRole="Mitarbeiter" ToRole="Abteilung" />
+          <NavigationProperty Name="Projekte" Relationship="Self.FK_Mitarbeiter_Projekte" FromRole="Mitarbeiter" ToRole="Projekte" />
+        </EntityType>
+        <EntityType Name="Projekte">
+          <Key>
+            <PropertyRef Name="ProjekteID" />
+          </Key>
+          <Property Name="ProjekteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjektName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mitarbeiter" Relationship="Self.FK_Mitarbeiter_Projekte" FromRole="Projekte" ToRole="Mitarbeiter" />
+        </EntityType>
+        <Association Name="FK_Mitarbeiter_Abteilung">
+          <End Role="Abteilung" Type="Self.Abteilung" Multiplicity="1" />
+          <End Role="Mitarbeiter" Type="Self.Mitarbeiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Abteilung">
+              <PropertyRef Name="AbteilungID" />
+            </Principal>
+            <Dependent Role="Mitarbeiter">
+              <PropertyRef Name="AbteilungID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mitarbeiter_Projekte">
+          <End Role="Projekte" Type="Self.Projekte" Multiplicity="1" />
+          <End Role="Mitarbeiter" Type="Self.Mitarbeiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekte">
+              <PropertyRef Name="ProjekteID" />
+            </Principal>
+            <Dependent Role="Mitarbeiter">
+              <PropertyRef Name="ProjektID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JuveTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Abteilung" EntityType="Self.Abteilung" />
+          <EntitySet Name="Mitarbeiter" EntityType="Self.Mitarbeiter" />
+          <EntitySet Name="Projekte" EntityType="Self.Projekte" />
+          <AssociationSet Name="FK_Mitarbeiter_Abteilung" Association="Self.FK_Mitarbeiter_Abteilung">
+            <End Role="Abteilung" EntitySet="Abteilung" />
+            <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mitarbeiter_Projekte" Association="Self.FK_Mitarbeiter_Projekte">
+            <End Role="Projekte" EntitySet="Projekte" />
+            <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JuveTestModelStoreContainer" CdmEntityContainer="JuveTestEntities">
+          <EntitySetMapping Name="Abteilung">
+            <EntityTypeMapping TypeName="JuveTestModel.Abteilung">
+              <MappingFragment StoreEntitySet="Abteilung">
+                <ScalarProperty Name="AbteilungID" ColumnName="AbteilungID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mitarbeiter">
+            <EntityTypeMapping TypeName="JuveTestModel.Mitarbeiter">
+              <MappingFragment StoreEntitySet="Mitarbeiter">
+                <ScalarProperty Name="MitarbeiterID" ColumnName="MitarbeiterID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="ProjektID" ColumnName="ProjektID" />
+                <ScalarProperty Name="AbteilungID" ColumnName="AbteilungID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projekte">
+            <EntityTypeMapping TypeName="JuveTestModel.Projekte">
+              <MappingFragment StoreEntitySet="Projekte">
+                <ScalarProperty Name="ProjekteID" ColumnName="ProjekteID" />
+                <ScalarProperty Name="ProjektName" ColumnName="ProjektName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
