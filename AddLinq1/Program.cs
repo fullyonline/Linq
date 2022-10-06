@@ -171,8 +171,13 @@ namespace AddLinq1
 
             Console.WriteLine("nur wenn Aufgabe 10 erreicht ist, dann auskommentieren");
 
-            //TODO
-            //repo.AddMitarbeiter(newMit);
+            //Stimmt sicherlich nicht, aber Aufgabenstellung ist komisch.
+            var newMit = new Mitarbeiter();
+            newMit.Name = "Schmid";
+            newMit.Vorname = "Marco";
+            newMit.AbteilungID = abteilungListe.Where(abt => abt.Name == "Software").First().AbteilungID;
+            newMit.ProjektID = projektListe.Where(pro => pro.ProjektName == "Mars").First().ProjekteID;
+            repo.AddMitarbeiter(newMit);
 
             Console.WriteLine("--------------");
             Console.WriteLine("Aufgabe 11");
