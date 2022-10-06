@@ -19,42 +19,49 @@ namespace AddLinq1
             var projektListe = repo.GetProjekctList();
 
             Console.WriteLine("Aufgabe 1");
-            Console.WriteLine("Eine Zeile --------------");
-
-            //TODO
+            Console.WriteLine("Eine Zeile --------------"); // Eine Zeile = object.Select(o => {})
+            
+            mitarbeiterList.ForEach(ma => {
+                Console.WriteLine($"{ma.Name}\t{ma.Vorname}");
+            });
 
             Console.WriteLine("--------------");
-
             Console.WriteLine("Aufgabe 2");
             Console.WriteLine("--------------");
 
-            //TODO
+            var aufg2Mas = from ma in mitarbeiterList
+                           join abt in abteilungListe on ma.AbteilungID equals abt.AbteilungID
+                           select new
+                           {
+                               Name = ma.Name,
+                               Vorname = ma.Vorname,
+                               Abteilung = abt.Name
+                           };
+
+            foreach(var ma in aufg2Mas)
+            {
+                Console.WriteLine($"{ma.Vorname}\t{ma.Name}\t-\t{ma.Abteilung}");
+            }
 
             Console.WriteLine("--------------");
-
-
             Console.WriteLine("Aufgabe 3");
             Console.WriteLine("--------------");
 
-            //TODO
+            
 
             Console.WriteLine("--------------");
-
             Console.WriteLine("Aufgabe 4");
             Console.WriteLine("--------------");
 
             //TODO
 
             Console.WriteLine("--------------");
-
             Console.WriteLine("Aufgabe 5");
             Console.WriteLine("--------------");
 
             //TODO
 
             Console.WriteLine("--------------");
-
-
             Console.WriteLine("Aufgabe 6");
             Console.WriteLine("--------------");
 
@@ -66,28 +73,24 @@ namespace AddLinq1
             //TODO
 
             Console.WriteLine("--------------");
-
             Console.WriteLine("Aufgabe 7");
             Console.WriteLine("Eine Zeile --------------");
 
             //TODO
 
             Console.WriteLine("--------------");
-
             Console.WriteLine("Aufgabe 8");
             Console.WriteLine("Eine Zeile --------------");
 
             //TODO
 
             Console.WriteLine("--------------");
-
             Console.WriteLine("Aufgabe 9");
             Console.WriteLine("Eine Zeile --------------");
 
             //TODO
 
             Console.WriteLine("--------------");
-
             Console.WriteLine("Aufgabe 10");
             Console.WriteLine("--------------");
 
@@ -97,15 +100,12 @@ namespace AddLinq1
             //repo.AddMitarbeiter(newMit);
 
             Console.WriteLine("--------------");
-
             Console.WriteLine("Aufgabe 11");
             Console.WriteLine("Eine Zeile --------------");
 
             //TODO
 
             Console.WriteLine("--------------");
-
-
             Console.WriteLine("Aufgabe 12");
             Console.WriteLine("Eine Zeile --------------");
 
@@ -113,20 +113,17 @@ namespace AddLinq1
             //TODO
 
             Console.WriteLine("--------------");
-
             Console.WriteLine("Aufgabe 13");
             Console.WriteLine("Auslassen --------------");
 
            
 
             Console.WriteLine("--------------");
-
             Console.WriteLine("Aufgabe 14");
             Console.WriteLine("Auslassen --------------");
 
             //TODO
-
-            
+                        
 
             Console.WriteLine("--------------");
             Console.ReadKey();
