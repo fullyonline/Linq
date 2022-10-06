@@ -191,7 +191,12 @@ namespace AddLinq1
             Console.WriteLine("Eine Zeile --------------");
 
 
-            //TODO
+            var aufg12 = mitarbeiterList.GroupBy(ma => ma.Projekte.ProjektName);
+            foreach(var item in aufg12)
+            {
+                Console.WriteLine($"Projekt: {item.Key}");
+                Console.WriteLine($"Anzahl MAs: {item.Count()}");
+            }
 
             Console.WriteLine("--------------");
             Console.WriteLine("Aufgabe 13");
