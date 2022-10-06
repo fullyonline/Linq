@@ -168,7 +168,7 @@ namespace AddLinq1
             newMit.Vorname = "Marco";
             newMit.AbteilungID = abteilungListe.Where(abt => abt.Name == "Software").First().AbteilungID;
             newMit.ProjektID = projektListe.Where(pro => pro.ProjektName == "Mars").First().ProjekteID;
-            repo.AddMitarbeiter(newMit);
+            // repo.AddMitarbeiter(newMit);
 
             Console.WriteLine("--------------");
             Console.WriteLine("Aufgabe 11");
