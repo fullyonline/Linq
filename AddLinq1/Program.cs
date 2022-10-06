@@ -153,11 +153,9 @@ namespace AddLinq1
             Console.WriteLine("Aufgabe 8");
             Console.WriteLine("Eine Zeile --------------");
 
-            var aufg8 = mitarbeiterList.Where(ma => ma.Position == "Abteilungsleiter");
-            foreach (var ma in aufg8)
-            {
-                Console.WriteLine($"{ma.Name}\t{ma.Vorname}");
-            };
+            var aufg8 = mitarbeiterList.Where(ma => ma.Position == "Abteilungsleiter").Count();
+            Console.WriteLine($"Anzahl Abteilungsleiter: {aufg8}");
+            
 
             Console.WriteLine("--------------");
             Console.WriteLine("Aufgabe 9");
