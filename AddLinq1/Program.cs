@@ -183,7 +183,8 @@ namespace AddLinq1
             Console.WriteLine("Aufgabe 11");
             Console.WriteLine("Eine Zeile --------------");
 
-            //TODO
+            var aufg11 = mitarbeiterList.Where(ma => ma.Projekte.ProjektName == "Mars" && ma.Abteilung.Name == "Software").Count();
+            Console.WriteLine($"Anzahl MAs von Mars Projekten und Software Abteilung: {aufg11}");
 
             Console.WriteLine("--------------");
             Console.WriteLine("Aufgabe 12");
