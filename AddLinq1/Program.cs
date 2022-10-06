@@ -47,7 +47,22 @@ namespace AddLinq1
             Console.WriteLine("Aufgabe 3");
             Console.WriteLine("--------------");
 
-            
+            var aufg3 = from ma in mitarbeiterList
+                        join abt in abteilungListe on ma.AbteilungID equals abt.AbteilungID
+                        join proj in projektListe on ma.ProjektID equals proj.ProjekteID
+                        select new
+                        {
+                            Name = ma.Name,
+                            Vorname = ma.Vorname,
+                            Abteilung = abt.Name,
+                            Projekt = proj.ProjektName
+                        };
+
+            foreach(var ma in aufg3)
+            {
+                Console.WriteLine($"{ma.Vorname}\t{ma.Name}\t-\t{ma.Abteilung}\t-\t{ma.Projekt}");
+            }
+
 
             Console.WriteLine("--------------");
             Console.WriteLine("Aufgabe 4");
