@@ -31,14 +31,15 @@ namespace AddLinq1
             Console.WriteLine("--------------");
 
             var aufg2Mas = from ma in mitarbeiterList
-                       select new
-                       {
-                           Name = ma.Name,
-                           Vorname = ma.Vorname,
-                           Abteilung = ma.Abteilung.Name
-                       };
+                           join abt in abteilungListe on ma.AbteilungID equals abt.AbteilungID
+                           select new
+                           {
+                               Name = ma.Name,
+                               Vorname = ma.Vorname,
+                               Abteilung = abt.Name
+                           };
 
-            foreach (var ma in aufg2Mas)
+            foreach(var ma in aufg2Mas)
             {
                 Console.WriteLine($"{ma.Vorname}\t{ma.Name}\t-\t{ma.Abteilung}");
             }
@@ -48,12 +49,14 @@ namespace AddLinq1
             Console.WriteLine("--------------");
 
             var aufg3 = from ma in mitarbeiterList
+                        join abt in abteilungListe on ma.AbteilungID equals abt.AbteilungID
+                        join proj in projektListe on ma.ProjektID equals proj.ProjekteID
                         select new
                         {
                             Name = ma.Name,
                             Vorname = ma.Vorname,
-                            Abteilung = ma.Abteilung.Name,
-                            Projekt = ma.Projekte.ProjektName
+                            Abteilung = abt.Name,
+                            Projekt = proj.ProjektName
                         };
 
             foreach(var ma in aufg3)
@@ -67,13 +70,15 @@ namespace AddLinq1
             Console.WriteLine("--------------");
 
             var aufg4 = from ma in mitarbeiterList
-                        where ma.Abteilung.Name == "Mechanik"
+                        join abt in abteilungListe on ma.AbteilungID equals abt.AbteilungID
+                        join pro in projektListe on ma.ProjektID equals pro.ProjekteID
+                        where abt.Name == "Mechanik"
                         select new
                         {
                             Name = ma.Name,
                             Vorname = ma.Vorname,
-                            Abteilung = ma.Abteilung.Name,
-                            Projekt = ma.Projekte.ProjektName
+                            Abteilung = abt.Name,
+                            Projekt = pro.ProjektName
                         };
 
             foreach(var ma in aufg4)
@@ -87,13 +92,15 @@ namespace AddLinq1
 
 
             var aufg5 = from ma in mitarbeiterList
-                        where ma.Projekte.ProjektName == "Mars"
+                        join abt in abteilungListe on ma.AbteilungID equals abt.AbteilungID
+                        join pro in projektListe on ma.ProjektID equals pro.ProjekteID
+                        where pro.ProjektName == "Mars"
                         select new
                         {
                             Name = ma.Name,
                             Vorname = ma.Vorname,
-                            Abteilung = ma.Abteilung.Name,
-                            Projekt = ma.Projekte.ProjektName
+                            Abteilung = abt.Name,
+                            Projekt = pro.ProjektName
                         };
 
             foreach (var ma in aufg5)
@@ -106,13 +113,15 @@ namespace AddLinq1
             Console.WriteLine("--------------");
 
             var aufg6a = from ma in mitarbeiterList
-                        where ma.Projekte.ProjektName == "Erde" && ma.Abteilung.Name == "Software"
+                        join abt in abteilungListe on ma.AbteilungID equals abt.AbteilungID
+                        join pro in projektListe on ma.ProjektID equals pro.ProjekteID
+                        where pro.ProjektName == "Erde" && abt.Name == "Software"
                         select new
                         {
                             Name = ma.Name,
                             Vorname = ma.Vorname,
-                            Abteilung = ma.Abteilung.Name,
-                            Projekt = ma.Projekte.ProjektName
+                            Abteilung = abt.Name,
+                            Projekt = pro.ProjektName
                         };
 
             foreach (var ma in aufg6a)
